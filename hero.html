@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIG Supply Chain — міжнародна логістика для імпортерів та експортерів</title>
+<meta name="description" content="BIG Supply Chain організовує міжнародні перевезення worldwide: море, авіа, авто, залізниця, LCL, фрахтування суден, митне оформлення та складські рішення.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAECF4;--ink:#0B0D12;--muted:#5B616E;--accent:#2F5BEA;--accent-dark:#244ED6;
+    --card:#FFFFFF;--pill:#F2F3F7;--line:#E6E8F0;--maxw:1400px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .container{width:100%;max-width:none;margin:0 auto;padding:0 20px}
+
+  /* shared */
+  .label-pill{display:inline-flex;align-items:center;gap:9px;background:var(--pill);border-radius:4px;padding:9px 18px;font-size:15px;font-weight:600}
+  .label-pill svg{width:16px;height:16px;color:var(--accent)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:44px}
+  .sec-title{font-size:clamp(2rem,3.4vw,3rem);font-weight:500;line-height:1.12;letter-spacing:-.02em;margin-top:18px;max-width:20ch}
+  .sec-sub{margin:14px 0 40px;font-size:18px;color:var(--muted);max-width:62ch;line-height:1.6}
+  /* Transio-style section bar: title left, label right */
+  .sec-bar{background:#fff;border-radius:4px;padding:clamp(30px,3vw,46px) clamp(26px,3vw,50px);display:flex;justify-content:space-between;align-items:center;gap:30px;margin-bottom:28px}
+  .sec-bar .sec-title{margin:0;max-width:26ch}
+  .sec-bar__right{display:flex;align-items:center;gap:22px;flex:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap}
+  .eyebrow::before,.eyebrow::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+  @media (max-width:760px){ .sec-bar{flex-direction:column;align-items:flex-start;gap:18px} .sec-bar .sec-title{white-space:normal!important} }
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:transform .15s ease,background .2s ease,color .2s ease,border-color .2s ease;font-family:inherit}
+  .btn--primary{background:var(--accent);color:#fff;font-size:17px;padding:16px 32px}
+  .btn--primary:hover{background:var(--accent-dark)}
+  .btn--primary:active{transform:translateY(1px)}
+  .btn--ghost{background:#fff;color:var(--ink);font-size:16px;padding:15px 28px;border:1px solid var(--line)}
+  .btn--ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn svg{width:17px;height:17px}
+  .section{padding:60px 0}
+
+  /* HEADER */
+  .header{background:#fff;border-bottom-left-radius:4px;border-bottom-right-radius:4px;position:sticky;top:0;z-index:50;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .header--hidden{transform:translateY(-100%)}
+  .header .container{padding:0 30px}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0;gap:20px}
+  .logo img{height:58px;width:auto;filter:brightness(1.04)}
+  .nav__menu{display:flex;align-items:center;gap:24px;list-style:none}
+  .nav__link{text-decoration:none;color:var(--ink);font-size:16px;font-weight:500;transition:color .2s ease}
+  .nav__link:hover,.nav__link.is-active{color:var(--accent)}
+  .nav__right{display:flex;align-items:center;gap:34px}
+  .lang{display:flex;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+  .lang b{color:var(--ink)}
+  .nav__cta{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;text-decoration:none;font-size:16px;font-weight:600;padding:14px 26px;border-radius:4px;transition:transform .15s ease,background .2s ease}
+  .nav__cta:hover{background:var(--accent-dark)}
+  .nav__cta:active{transform:translateY(1px)}
+  .nav__cta svg{width:16px;height:16px}
+  /* Mobile burger + bottom CTA bar (desktop: hidden) */
+  .nav__burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:54px;height:54px;background:var(--accent);border:none;border-radius:12px;cursor:pointer;padding:0;margin-left:auto;transition:background .2s ease}
+  .nav__burger:active{background:var(--accent-dark)}
+  .nav__burger span{display:block;width:24px;height:2px;background:#fff;border-radius:4px;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s ease}
+  .header--menu-open .nav__burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .header--menu-open .nav__burger span:nth-child(2){opacity:0}
+  .header--menu-open .nav__burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-cta{display:none}
+  .nav__brand,.nav__contact{display:none}
+  .mobile-cta__call{display:none}
+  .nav__overlay{position:fixed;inset:0;background:rgba(11,13,18,.45);z-index:55}
+  .nav__overlay[hidden]{display:none}
+
+  /* HERO */
+  .hero{padding:34px 0 56px}
+  .hero__grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+  .hero__left{background:var(--card);border-radius:4px;padding:54px 56px 56px;display:flex;flex-direction:column}
+  .badge{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--pill);border-radius:4px;padding:12px 22px;font-size:16px;font-weight:500}
+  .badge svg{width:18px;height:18px;color:var(--accent)}
+  .hero__title{margin-top:28px;font-size:clamp(2.2rem,3.5vw,3.2rem);line-height:1.08;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+  .hero__media{margin-top:32px;display:flex;align-items:stretch;width:168px}
+  .hero__media-bar{width:4px;border-radius:4px;background:var(--accent);flex:none}
+  .hero__thumb{position:relative;flex:1;border-radius:4px;overflow:hidden;aspect-ratio:16/9;margin-left:12px;background:#0e1622}
+  .hero__thumb video{width:100%;height:100%;object-fit:cover}
+  .hero__text{margin-top:30px;font-size:18px;line-height:1.62;color:var(--muted);max-width:60ch}
+  .hero__btns{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero__right{border-radius:4px;overflow:hidden;min-height:560px;background:#cfd6e6}
+  .hero__right img{width:100%;height:100%;object-fit:cover}
+  /* Hero entrance: staggered fade-up on load */
+  @keyframes heroIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .hero__left>*{opacity:0;animation:heroIn .85s cubic-bezier(.16,1,.3,1) both}
+  .hero__left>*:nth-child(1){animation-delay:.08s}
+  .hero__left>*:nth-child(2){animation-delay:.2s}
+  .hero__left>*:nth-child(3){animation-delay:.32s}
+  .hero__left>*:nth-child(4){animation-delay:.44s}
+  .hero__left>*:nth-child(5){animation-delay:.56s}
+  .hero__right{animation:heroIn 1.05s cubic-bezier(.16,1,.3,1) .24s both}
+  @media (prefers-reduced-motion:reduce){.hero__left>*,.hero__right{opacity:1;animation:none}}
+
+  /* HERO — Transio-style: logo + big heading + CTA left, swinging 3D container right, socials bottom-right */
+  .thero{padding:34px 0 56px}
+  .thero__card{position:relative;background:var(--card);border-radius:4px;display:grid;grid-template-columns:1fr 1.05fr;gap:30px;align-items:start;padding:clamp(32px,3vw,48px) clamp(34px,4vw,68px);min-height:0;overflow:hidden}
+  .thero__left{display:flex;flex-direction:column;align-items:flex-start;z-index:2;padding-top:0;margin-top:calc(30px - clamp(18px,2.8vw,42px))}
+  .thero__logo{width:auto;height:clamp(78px,7vw,118px);margin-bottom:clamp(26px,3.4vw,40px);filter:brightness(1.04)}
+  .thero__title{font-size:clamp(2.15rem,3.5vw,3.3rem);line-height:1.1;font-weight:700;letter-spacing:-.022em;color:var(--ink);max-width:20ch}
+  .thero__cta{margin-top:clamp(28px,3.2vw,40px);font-size:17px;padding:17px 34px}
+  .thero__right{position:relative;display:flex;align-items:flex-start;justify-content:center;min-height:0;margin-top:calc(-1 * clamp(38px,4vw,62px));z-index:1}
+  .thero__container{width:100%;max-width:760px;height:auto;object-fit:contain;transform-origin:50% 4%;animation:heroSway 6.5s cubic-bezier(.45,.05,.55,.95) infinite;will-change:transform}
+  @keyframes heroSway{0%{transform:rotate(-2.1deg)}50%{transform:rotate(2.1deg)}100%{transform:rotate(-2.1deg)}}
+  .thero__social{display:flex;gap:11px;margin-top:clamp(24px,2.8vw,34px)}
+  .thero__social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .15s ease}
+  .thero__social a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .thero__social a:active{transform:translateY(1px)}
+  .thero__social svg{width:17px;height:17px}
+  @media (max-width:980px){
+    .thero__card{grid-template-columns:1fr;gap:18px;text-align:left;min-height:0}
+    .thero__left{align-items:flex-start}
+    .thero__right{order:2;min-height:300px}
+    .thero__container{max-width:440px;animation-duration:7.5s}
+    .thero__social{position:static;order:3;justify-content:flex-start;margin-top:26px}
+  }
+  @media (max-width:620px){
+    .thero__container{max-width:320px;animation:none;transform:rotate(-1deg)}
+    .thero__title{max-width:none}
+    .thero__cta{width:100%;justify-content:center}
+    .thero__social{justify-content:center;width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.thero__container{animation:none;transform:rotate(-1deg)}}
+
+  /* KEY FEATURE */
+  .kf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .kf-block{border-radius:4px;min-height:240px;overflow:hidden;position:relative}
+  .kf-card{background:#fff;padding:34px;display:flex;flex-direction:column}
+  .kf-icon{width:48px;height:48px;align-self:flex-end;opacity:.92}
+  .kf-foot{margin-top:auto}
+  .kf-num{font-size:46px;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .kf-title{font-size:28px;font-weight:700;line-height:1.18;letter-spacing:-.01em;margin-top:6px}
+  .kf-sub{margin-top:8px;font-size:16px;color:var(--muted);font-weight:500;line-height:1.4}
+  .kf-video{background:#0e1622}
+  .kf-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .kf-contact{position:absolute;left:24%;right:0;bottom:0;background:rgba(13,18,28,.52);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);padding:24px 26px;border-top-left-radius:4px;color:#fff}
+  .kf-contact p{font-size:17px;line-height:1.4;margin-bottom:10px}
+  .kf-contact a{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600;font-size:16px}
+  .kf-contact a:hover{color:#cfe0ff}
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);filter:blur(4px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),filter .85s cubic-bezier(.16,1,.3,1);will-change:transform,opacity}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  @media (prefers-reduced-motion:reduce){.reveal,.reveal.in{opacity:1;transform:none;filter:none;transition:none}}
+
+  /* GENERIC CARD GRID (audience, advantages, cargo, guarantees) */
+  .cards{display:grid;gap:24px}
+  .cards--4{grid-template-columns:repeat(4,1fr)}
+  .cards--3{grid-template-columns:repeat(3,1fr)}
+  .icard{background:#fff;border-radius:4px;padding:34px 30px;display:flex;flex-direction:column;gap:18px}
+  .icard__icon{width:56px;height:56px;border-radius:4px;background:var(--pill);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none}
+  .icard__icon svg{width:28px;height:28px}
+  .icard__title{font-size:21px;font-weight:700;line-height:1.2}
+  .icard__desc{font-size:15.5px;color:var(--muted);line-height:1.58}
+  .icard__link{margin-top:auto;display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:600;font-size:15px;text-decoration:none}
+  .icard__link svg{width:15px;height:15px}
+
+  /* Advantages — sticky stacking layout */
+  .adv-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(34px,4vw,64px);align-items:start}
+  .adv-intro{position:sticky;top:120px;display:flex;flex-direction:column;gap:30px}
+  .adv-lead{font-size:clamp(19px,1.5vw,22px);line-height:1.55;color:var(--ink);max-width:none}
+  @media (max-width:880px){ .adv-lead br{display:none} }
+  .adv-intro .btn{align-self:flex-start}
+  .adv-stack{display:flex;flex-direction:column;gap:20px}
+  .adv-stack .icard{position:sticky;top:calc(112px + var(--i) * 16px);border:1px solid var(--line);box-shadow:0 24px 50px -28px rgba(11,13,18,.28)}
+  @media (max-width:880px){
+    .adv-layout{grid-template-columns:1fr;gap:28px}
+    .adv-intro{position:static;top:auto}
+    .adv-stack .icard{position:static;top:auto}
+  }
+
+  /* Audience cards — reveal image on hover */
+  .aud-card{position:relative;overflow:hidden;isolation:isolate;min-height:290px}
+  .aud-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .5s ease,transform .8s ease;z-index:0}
+  .aud-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,18,.2) 20%,rgba(11,13,18,.82));opacity:0;transition:opacity .5s ease;z-index:1}
+  .aud-card>*:not(img){position:relative;z-index:2}
+  .aud-card .icard__icon,.aud-card .icard__title,.aud-card .icard__desc{transition:color .4s ease,background .4s ease}
+  .aud-card:hover>img{opacity:1;transform:scale(1)}
+  .aud-card:hover::after{opacity:1}
+  .aud-card:hover .icard__title,.aud-card:hover .icard__desc{color:#fff}
+  .aud-card:hover .icard__icon{background:rgba(255,255,255,.2);color:#fff}
+  .gcard .icard__title{margin-top:auto}
+  .qcell{display:flex;align-items:flex-end;justify-content:flex-end}
+
+  .foot-cta{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:#fff;border-radius:4px;padding:28px 36px}
+  .foot-cta p{font-size:19px;font-weight:600;max-width:50ch}
+  .foot-cta--plain{background:transparent;padding:30px 0 0}
+  .foot-cta--accent{background:var(--accent);padding:30px 40px}
+  .foot-cta--accent p{color:#fff}
+  .foot-cta--accent .btn--primary{background:#fff;color:var(--accent)}
+  .foot-cta--accent .btn--primary:hover{background:#eef1ff}
+
+  /* PROCESS STEPS */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{background:#fff;border-radius:4px;padding:32px 30px;position:relative;overflow:hidden}
+  .step__num{position:absolute;top:-18px;right:8px;font-size:clamp(110px,9vw,160px);font-weight:800;color:var(--line);opacity:.45;line-height:1;z-index:0;pointer-events:none;user-select:none}
+  .step__title{position:relative;z-index:1;font-size:20px;font-weight:700;margin:0 0 12px}
+  .step__desc{position:relative;z-index:1;font-size:15px;color:var(--muted);line-height:1.55}
+
+  /* GEOGRAPHY */
+  .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+  .geo-grid>*{min-width:0}
+  .geo-map{background:#fff;border-radius:4px;padding:42px;display:flex;align-items:center;justify-content:center}
+  .geo-map__inner{position:relative;width:100%}
+  .geo-map__bg{display:block;width:100%;opacity:.92}
+  /* dashed shipping routes */
+  .geo-routes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .geo-routes path{fill:none;stroke:rgba(47,91,234,.45);stroke-width:.4;stroke-dasharray:1.4 1.4;vector-effect:non-scaling-stroke;animation:routeFlow 26s linear infinite}
+  @keyframes routeFlow{to{stroke-dashoffset:-120}}
+  /* interactive pins */
+  .geo-pin{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer;z-index:1}
+  .geo-pin:hover,.geo-pin:focus-within{z-index:3}
+  .geo-dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(47,91,234,.5);animation:geoPulse 2.6s infinite;transition:transform .3s ease}
+  .geo-pin.is-origin .geo-dot{width:17px;height:17px;background:var(--accent);box-shadow:0 0 0 5px rgba(47,91,234,.22);animation:none}
+  .geo-pin:hover .geo-dot,.geo-pin:focus-within .geo-dot{transform:scale(1.18)}
+  .geo-pin:focus-visible{outline:none}
+  .geo-pin:focus-visible .geo-dot{outline:2px solid var(--accent);outline-offset:4px}
+  /* country bubble (image + label) */
+  .geo-pop{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translate(-50%,8px) scale(.9);transform-origin:50% 110%;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;pointer-events:none;transition:opacity .28s ease,transform .28s ease}
+  .geo-pin:hover .geo-pop,.geo-pin:focus-within .geo-pop,.geo-pin.is-open .geo-pop{opacity:1;transform:translate(-50%,0) scale(1)}
+  .geo-pop__img{position:relative;width:76px;height:76px;border-radius:50%;background-size:cover;background-position:center;border:3px solid #fff;box-shadow:0 16px 32px -12px rgba(11,13,18,.45)}
+  .geo-pop__img::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%) rotate(45deg);width:12px;height:12px;background:#fff}
+  .geo-pop__name{font-size:13px;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);padding:4px 12px;border-radius:4px;white-space:nowrap;box-shadow:0 8px 20px -10px rgba(11,13,18,.3)}
+  @keyframes geoPulse{0%{box-shadow:0 0 0 0 rgba(47,91,234,.5)}70%{box-shadow:0 0 0 16px rgba(47,91,234,0)}100%{box-shadow:0 0 0 0 rgba(47,91,234,0)}}
+  @media (prefers-reduced-motion:reduce){.geo-routes path,.geo-dot{animation:none}}
+  .geo-tags{position:relative;margin:26px 0 30px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .geo-marquee__track{display:flex;align-items:center;width:max-content;animation:geoMarquee 24s linear infinite}
+  .geo-tags:hover .geo-marquee__track{animation-play-state:paused}
+  @keyframes geoMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.geo-marquee__track{animation:none}}
+  .tag{display:inline-flex;align-items:center;gap:8px;flex:none;white-space:nowrap;margin-right:10px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px 18px;font-weight:600;font-size:14.5px}
+  .tag span{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+  /* FORM */
+  .booking{display:grid;grid-template-columns:1fr 1.1fr;gap:0;background:#fff;border-radius:4px;overflow:hidden}
+  .booking__media{position:relative;min-height:560px}
+  .booking__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .booking__media .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,18,0) 40%,rgba(11,13,18,.55));z-index:1}
+  .booking__media ul{position:absolute;left:34px;right:34px;bottom:34px;z-index:2;list-style:none;color:#fff;display:flex;flex-direction:column;gap:14px}
+  .booking__media li{display:flex;gap:12px;font-size:16px;line-height:1.45;align-items:flex-start}
+  .booking__media li svg{width:20px;height:20px;flex:none;margin-top:2px;color:#fff}
+  .booking__form{padding:48px 50px}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  .field label{font-size:14px;font-weight:600;color:var(--muted)}
+  .field input{border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:15px;font-family:inherit;background:#fbfbfd}
+  .field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,91,234,.12)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);margin:8px 0 18px;line-height:1.5}
+  .consent input{margin-top:3px}
+  .form-note{font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+
+  /* FAQ */
+  .faq-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:stretch;background:#fff;border-radius:4px;padding:34px}
+  .faq{margin:0}
+  .faq details{background:none;border-radius:0;padding:0;margin:0;border-bottom:1px solid var(--line)}
+  .faq details:last-child{border-bottom:none}
+  .faq summary{list-style:none;cursor:pointer;font-size:18px;font-weight:600;padding:17px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:26px;font-weight:300;color:var(--ink);flex:none;transition:transform .2s}
+  .faq details[open] summary::after{content:"\2212";color:var(--accent)}
+  .faq p{padding:0 0 20px;font-size:16px;color:var(--muted);line-height:1.6;max-width:60ch}
+  .faq-media{border-radius:4px;overflow:hidden;min-height:480px}
+  .faq-media img{width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:860px){.faq-layout{grid-template-columns:1fr;gap:36px}.faq-media{min-height:320px;order:-1}}
+
+  /* CTA BAND */
+  /* CTA — Transio-style: tall image card with bottom fade-to-dark, content bottom-left */
+  .cta{position:relative;border-radius:4px;overflow:hidden;
+    background-image:linear-gradient(rgba(11,13,18,0) 18%,rgba(11,13,18,.55) 62%,rgba(11,13,18,.96) 96%),url("assets/7C065D58-4A29-4BC7-B180-98733390669B.png");
+    background-repeat:no-repeat,no-repeat;background-position:0 0,50% 42%;background-size:auto,cover;background-color:#0B0D12}
+  .cta__wrap{padding-top:400px;margin:0 0 20px 30px}
+  .cta__content{max-width:420px;color:#fff}
+  .cta__title{font-size:clamp(1.9rem,3vw,2.7rem);font-weight:700;line-height:1.12;letter-spacing:-.02em;color:#fff}
+  .cta__content .btn{margin-top:28px}
+  .btn--light{background:#fff;color:var(--ink);font-size:18px;padding:18px 40px}
+  .btn--light:hover{background:#eef1ff}
+  @media (min-width:1440px){ .cta__wrap{padding-top:520px;margin-left:40px} .cta__content{max-width:480px} }
+  @media (min-width:1920px){ .cta__wrap{padding-top:620px} }
+  @media (max-width:991px){ .cta__wrap{padding-top:300px} }
+  @media (max-width:767px){ .cta__wrap{padding-top:250px;margin-left:22px} .cta__content{max-width:none} }
+  @media (max-width:479px){ .cta__wrap{padding-top:200px} }
+  /* Webflow-style reveal: container fades + lifts + unblurs, title and button stagger in */
+  .cta-reveal{opacity:0;transform:translateY(60px);filter:blur(6px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
+  .cta-reveal.in{opacity:1;transform:none;filter:none}
+  .cta-reveal .cta__title,.cta-reveal .cta__content .btn{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .cta-reveal.in .cta__title{opacity:1;transform:none;transition-delay:.18s}
+  .cta-reveal.in .cta__content .btn{opacity:1;transform:none;transition-delay:.34s}
+  @media (prefers-reduced-motion:reduce){.cta-reveal,.cta-reveal .cta__title,.cta-reveal .cta__content .btn{opacity:1;transform:none;filter:none;transition:none}}
+
+  /* BLOG */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .post{display:flex;flex-direction:column;gap:20px}
+  .post__top{background:#fff;border-radius:4px;padding:24px}
+  .post__meta{font-size:15px;color:var(--ink);font-weight:500;margin-bottom:18px}
+  .post__img{border-radius:4px;overflow:hidden;aspect-ratio:4/3}
+  .post__img img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .post:hover .post__img img{transform:scale(1.05)}
+  .post__titlecard{background:#fff;border-radius:4px;padding:30px 30px 34px;flex:1;display:flex;flex-direction:column;gap:14px}
+  .post__title{font-size:24px;font-weight:600;line-height:1.22;letter-spacing:-.01em}
+  .post__icon{width:50px;height:50px;border-radius:4px;background:var(--pill);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:none;margin-bottom:18px}
+  .post__icon svg{width:26px;height:26px}
+  .post__desc{font-size:15.5px;color:var(--muted);line-height:1.58}
+  .post__link{margin-top:auto;display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:600;font-size:15px;text-decoration:none}
+  .post__link svg{width:15px;height:15px}
+  .services-grid .post{gap:6px}
+  .services-grid .post__top{padding:14px}
+  .services-grid .post__img{aspect-ratio:16/9}
+  .services-grid .post__titlecard{padding:24px 26px 28px}
+
+  /* FOOTER */
+  .footer{background:#fff;color:var(--ink);border-radius:4px;margin-top:60px;padding:30px 0}
+  .footer__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+  .footer__logo img{height:100px;width:auto;filter:brightness(1.04)}
+  .footer__about{margin-top:22px;font-size:15.5px;color:var(--muted);line-height:1.6;max-width:36ch}
+  .footer__social{display:flex;gap:11px;margin-top:22px}
+  .footer__social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .15s ease}
+  .footer__social a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .footer__social a:active{transform:translateY(1px)}
+  .footer__social svg{width:17px;height:17px}
+  .footer__col h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:18px}
+  .footer__col a{display:block;text-decoration:none;color:var(--ink);margin-bottom:12px;font-size:15.5px;transition:color .2s}
+  .footer__col a:hover{color:var(--accent)}
+  .footer__bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:24px;font-size:14.5px;color:var(--muted)}
+
+  @media (max-width:1024px){
+    .cards--4,.cards--3,.steps,.kf-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}
+    .footer__top{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:980px){
+    body{overflow-x:clip}
+    .sec-title{white-space:normal!important}
+    .header .container{padding:0 20px}
+    .nav__burger{display:flex;position:relative;z-index:65}
+    .logo{position:relative;z-index:50}
+    .nav__cta{display:none}
+    .lang{display:none}
+    /* Left slide-in drawer */
+    .nav__menu{position:fixed;top:0;left:0;bottom:0;width:80%;max-width:330px;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:0;background:#E9EBF2;padding:28px 28px calc(28px + env(safe-area-inset-bottom));z-index:60;transform:translateX(-100%);visibility:hidden;transition:transform .42s cubic-bezier(.16,1,.3,1),visibility .42s;overflow-y:auto;box-shadow:0 0 70px rgba(11,13,18,.22)}
+    .header--menu-open .nav__menu{transform:none;visibility:visible}
+    /* keep burger above drawer + overlay; hide original logo (drawer has its own brand) */
+    .header--menu-open{z-index:70;background:transparent;box-shadow:none}
+    .header--menu-open .logo{opacity:0;visibility:hidden;pointer-events:none}
+    .nav__menu li{width:100%}
+    .nav__link{display:block;padding:13px 0;font-size:21px;font-weight:600;color:var(--ink)}
+    .nav__contact{display:block;margin-top:auto;padding-top:26px;border-top:1px solid rgba(11,13,18,.1);margin-top:auto}
+    .nav__social{display:flex;gap:11px;margin-bottom:22px}
+    .nav__social a{width:44px;height:44px;border-radius:50%;border:1px solid rgba(11,13,18,.14);display:grid;place-items:center;color:var(--ink);text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease}
+    .nav__social a:active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .nav__social svg{width:18px;height:18px}
+    .nav__crow{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-size:16px;font-weight:600;padding:9px 0}
+    .nav__crow-ic{width:40px;height:40px;border-radius:50%;background:#222630;color:#fff;display:grid;place-items:center;flex:none}
+    .nav__crow-ic svg{width:18px;height:18px}
+    .mobile-cta{display:flex;align-items:center;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:45;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+    .mobile-cta .btn{flex:1;justify-content:center;font-size:17px;padding:16px 24px}
+    .mobile-cta__call{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:4px;border:1px solid var(--line);background:#fff;color:var(--accent)}
+    .mobile-cta__call svg{width:22px;height:22px}
+    .mobile-cta__call:active{transform:translateY(1px)}
+    body{padding-bottom:80px}
+    .hero__grid,.geo-grid,.booking{grid-template-columns:1fr}
+    .hero__right{min-height:320px}
+    .hero__left{padding:36px 28px 40px}
+    .booking__media{min-height:260px}
+  }
+  @media (max-width:620px){
+    .container{padding:0 20px}
+    .nav{padding:18px 0}
+    .logo img{height:52px}
+    .cards--4,.cards--3,.steps,.form-row,.kf-grid,.blog-grid{grid-template-columns:1fr}
+    /* KEY FEATURE — mobile: all cards 165px tall, icon + bold black heading centered; image card with full-height right glass panel */
+    .kf-grid{gap:16px}
+    .kf-block{min-height:0;height:165px;border-radius:4px}
+    .kf-card{padding:16px 20px;align-items:center;text-align:center;justify-content:center}
+    .kf-icon{align-self:center;width:42px;height:42px;margin:0 0 10px;opacity:1}
+    .kf-foot{margin-top:0}
+    .kf-num{font-size:25px;font-weight:800;color:var(--ink);line-height:1.12;letter-spacing:-.01em}
+    .kf-title{font-size:25px;font-weight:800;color:var(--ink);line-height:1.12;letter-spacing:-.01em;margin-top:0}
+    .kf-sub{font-size:14px;font-weight:600;color:var(--muted);margin-top:6px}
+    .kf-video{height:165px}
+    .kf-contact{left:auto;right:0;top:0;bottom:0;width:48%;display:flex;flex-direction:column;justify-content:center;gap:10px;background:rgba(13,18,28,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:18px 20px;border-radius:0}
+    .kf-contact a{font-size:16px;text-decoration:underline;text-underline-offset:3px}
+    /* Section headings — eyebrow label above title, all centered */
+    .sec-bar{flex-direction:column;align-items:center;text-align:center;gap:14px}
+    .sec-bar .eyebrow{order:-1}
+    .sec-bar .sec-title{max-width:none;white-space:normal!important}
+    .hero__btns .btn{width:100%;justify-content:center}
+    .footer__top{grid-template-columns:1fr}
+    .booking__form{padding:32px 26px}
+  }
+
+  /* CARGO TYPES — split layout + numbered accordion */
+  .cargo2{display:grid;grid-template-columns:.95fr 1.05fr;gap:0;align-items:stretch;background:#fff;border-radius:4px;overflow:hidden}
+  .cargo2__aside{position:relative;min-height:520px;display:flex;isolation:isolate}
+  .cargo2__aside img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:right center}
+  .cargo2__aside::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(255,255,255,.76) 0%,rgba(255,255,255,.58) 38%,rgba(255,255,255,.3) 62%,rgba(255,255,255,.09) 82%,rgba(255,255,255,0) 93%),linear-gradient(90deg,rgba(255,255,255,0) 88%,rgba(255,255,255,.92) 100%)}
+  .cargo2__inner{align-self:flex-start;width:100%;max-width:740px;padding:clamp(30px,3vw,42px) clamp(28px,3vw,44px)}
+  .cargo2__inner h2{font-size:clamp(1.9rem,2.7vw,2.6rem);font-weight:500;line-height:1.12;letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance}
+  .cargo2__bar{display:block;width:64px;height:4px;border-radius:4px;background:var(--accent);margin:26px 0}
+  .cargo2__inner p{margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:none}
+  .cargo2__list{align-self:flex-start;width:100%;padding:clamp(14px,1.6vw,22px) clamp(28px,3vw,46px)}
+  .cargo2__list details{border-bottom:1px solid var(--line)}
+  .cargo2__list details:last-child{border-bottom:none}
+  .cargo2__list summary{list-style:none;cursor:pointer;display:flex;align-items:center;padding:21px 2px;font-size:clamp(17px,1.4vw,20px);font-weight:600;color:var(--ink);transition:color .2s}
+  .cargo2__list summary::-webkit-details-marker{display:none}
+  .cargo2__num{flex:none;width:58px;color:var(--accent);font-weight:500;font-size:16px;font-variant-numeric:tabular-nums}
+  .cargo2__t{flex:1 1 auto}
+  .cargo2__list summary::after{content:"+";font-size:26px;font-weight:400;color:var(--ink);flex:none;margin-left:20px;line-height:1;transition:color .2s}
+  .cargo2__list details[open] summary{color:var(--accent)}
+  .cargo2__list details[open] summary::after{content:"\2212";color:var(--accent)}
+  .cargo2__list p{margin:0;padding:0 2px 26px 58px;color:var(--muted);font-size:16px;line-height:1.6;max-width:70ch}
+  @media (max-width:980px){.cargo2{grid-template-columns:1fr}.cargo2__aside{min-height:300px}.cargo2__inner{align-self:center;max-width:36ch}}
+
+  /* Moved CTA buttons (advantages + geography) — centered below their blocks */
+  .adv-foot{margin-top:36px;display:flex;justify-content:center}
+  .geo-foot{margin-top:30px;display:flex;justify-content:center}
+
+  /* ===== MOBILE REFINEMENTS ===== */
+  @media (max-width:620px){
+    /* 0. HEADER — floating bar, 20px inset from screen edges */
+    .header{margin:14px 20px 0;border-radius:8px;box-shadow:0 14px 34px -20px rgba(11,13,18,.4)}
+    .header .container{padding:0 16px}
+
+    /* 1. KEY FEATURE — number + word on one line, sub below */
+    .kf-foot{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:6px}
+    .kf-foot .kf-sub{flex-basis:100%;margin-top:4px}
+
+    /* 2. AUDIENCE — shorter cards, less empty space */
+    .cards--4 .aud-card{min-height:0;padding:22px 20px;gap:12px}
+
+    /* 3. SERVICES — sticky stacking on scroll */
+    .services-grid{display:block}
+    .services-grid .post{position:sticky;top:calc(82px + var(--si,0) * 12px);background:#fff;border-radius:4px;overflow:hidden;gap:0;margin-bottom:18px;box-shadow:0 -10px 42px -22px rgba(11,13,18,.55)}
+    .services-grid .post__top{padding:14px 14px 0}
+    .services-grid .post__titlecard{padding:20px 22px 24px}
+
+    /* 4. ADVANTAGES — full-width blue button below cards */
+    .adv-foot{margin-top:26px}
+    .adv-foot .btn{width:100%;justify-content:center}
+
+    /* 5. GEOGRAPHY — full-width centered button below map */
+    .geo-foot{margin-top:24px}
+    .geo-foot .btn{width:100%;justify-content:center}
+
+    /* 6. GUARANTEES — sticky stacking + full-width button */
+    .cards--3{display:block}
+    .cards--3 .gcard{position:sticky;top:calc(82px + var(--si,0) * 12px);margin-bottom:18px;box-shadow:0 -10px 42px -22px rgba(11,13,18,.55)}
+    .qcell{display:block;margin-top:6px}
+    .qcell .btn{width:100%;justify-content:center}
+
+    /* 7. CTA — centered content; container pulled tight to the button (0 gap), with sway */
+    .thero__card{text-align:center;gap:0}
+    .thero__left{align-items:center}
+    .thero__title{max-width:none}
+    .thero__cta{align-self:center}
+    .cta-br{display:none}
+    .cta-pair{white-space:nowrap}
+    .thero__container{max-width:272px;margin-top:0;animation:heroSway 7.5s cubic-bezier(.45,.05,.55,.95) infinite !important;transform-origin:50% 4%}
+    .thero__right{min-height:0;margin-top:0}
+
+    /* 8. FOOTER — center all information */
+    .footer__top{text-align:center}
+    .footer__logo img{margin-left:auto;margin-right:auto}
+    .footer__about{margin-left:auto;margin-right:auto}
+    .footer__social{justify-content:center}
+    .footer__bottom{justify-content:center;text-align:center}
+  }
+
+  /* =====================================================================
+     PRELOADER — brand intro ("Motion beam")
+     Tune everything via the CSS variables on .preloader below:
+       --pl-accent  brand colour      --pl-logo-w  logo size
+       --pl-speed   animation speed (1 = base, <1 faster, >1 slower)
+       --pl-exit    fade-out duration
+     ===================================================================== */
+  .preloader{
+    --pl-bg:#EAECF4;
+    --pl-accent:#2F5BEA;
+    --pl-logo-w:clamp(190px,42vw,300px);
+    --pl-speed:1;
+    --pl-exit:.8s;
+    position:fixed;inset:0;z-index:99999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:var(--pl-bg);
+    transition:opacity var(--pl-exit) cubic-bezier(.16,1,.3,1),
+               transform var(--pl-exit) cubic-bezier(.16,1,.3,1),
+               filter var(--pl-exit) cubic-bezier(.16,1,.3,1);
+    will-change:opacity,transform,filter;
+  }
+  .preloader__logo{
+    position:relative;width:var(--pl-logo-w);max-width:74vw;
+    padding:24px 28px;background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 34px 64px -34px rgba(11,13,18,.28);
+    opacity:0;transform:translateY(12px) scale(.985);
+    animation:plLogoIn calc(.9s * var(--pl-speed)) cubic-bezier(.16,1,.3,1) .08s forwards;
+  }
+  .preloader__logo img{width:100%;height:auto;display:block}
+  /* premium light sweep across the wordmark, once per cycle */
+  .preloader__logo::after{
+    content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;
+    background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.72) 50%,transparent 68%);
+    transform:translateX(-130%);
+    animation:plSheen calc(2.8s * var(--pl-speed)) cubic-bezier(.5,0,.2,1) calc(.9s * var(--pl-speed)) infinite;
+  }
+  /* transit beam — abstraction of the logo's motion streaks */
+  .preloader__track{
+    position:relative;width:var(--pl-logo-w);max-width:74vw;height:2px;margin-top:30px;
+    background:rgba(11,13,18,.09);border-radius:4px;overflow:hidden;
+    opacity:0;animation:plFadeIn calc(.6s * var(--pl-speed)) ease .5s forwards;
+  }
+  .preloader__beam{
+    position:absolute;top:0;left:0;height:100%;width:40%;border-radius:4px;
+    background:linear-gradient(90deg,transparent,var(--pl-accent));
+    box-shadow:0 0 12px rgba(47,91,234,.55);
+    animation:plBeam calc(1.5s * var(--pl-speed)) cubic-bezier(.66,0,.34,1) infinite;
+  }
+  @keyframes plLogoIn{to{opacity:1;transform:none}}
+  @keyframes plFadeIn{to{opacity:1}}
+  @keyframes plSheen{0%{transform:translateX(-130%)}55%{transform:translateX(130%)}100%{transform:translateX(130%)}}
+  @keyframes plBeam{0%{transform:translateX(-120%)}100%{transform:translateX(265%)}}
+  .preloader.is-done{opacity:0;transform:scale(1.015) translateY(-10px);filter:blur(6px);pointer-events:none}
+  .preloader.is-hidden{display:none}
+  html.pl-lock{overflow:hidden}
+  @media (prefers-reduced-motion:reduce){
+    .preloader__logo{opacity:1;transform:none;animation:none}
+    .preloader__logo::after,.preloader__beam{animation:none}
+    .preloader__track{opacity:1;animation:none}
+    .preloader__beam{width:100%;opacity:.55;background:linear-gradient(90deg,transparent,var(--pl-accent),transparent)}
+    .preloader{transition-duration:.35s}
+  }
+</style>
+</head>
+<body>
+
+  <!-- PRELOADER (brand intro) -->
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Завантаження сайту">
+    <div class="preloader__logo">
+      <img src="assets/image%207.png" alt="BIG Supply Chain — Strategic Logistic Solutions">
+    </div>
+    <div class="preloader__track"><span class="preloader__beam"></span></div>
+  </div>
+  <script>
+    /* Preloader controller — runs immediately to lock scroll, hides on full load */
+    (function(){
+      var pl=document.getElementById('preloader');
+      if(!pl) return;
+      var root=document.documentElement;
+      root.classList.add('pl-lock');
+      var MIN_MS=900, start=Date.now(), done=false;
+      function exitMs(){
+        var v=(getComputedStyle(pl).getPropertyValue('--pl-exit')||'.8s').trim();
+        var n=parseFloat(v)||0.8;
+        return (v.indexOf('ms')>-1 ? n : n*1000) || 800;
+      }
+      function finish(){
+        if(done) return; done=true;
+        var wait=Math.max(0, MIN_MS-(Date.now()-start));
+        setTimeout(function(){
+          pl.classList.add('is-done');
+          root.classList.remove('pl-lock');
+          setTimeout(function(){ pl.classList.add('is-hidden'); }, exitMs()+80);
+        }, wait);
+      }
+      if(document.readyState==='complete') finish();
+      else window.addEventListener('load', finish, {once:true});
+      setTimeout(finish, 6000); /* safety fallback if load never fires */
+    })();
+  </script>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav" aria-label="Головна навігація">
+        <a class="logo" href="#top" aria-label="BIG Supply Chain"><img src="assets/image%207.png" alt="BIG Supply Chain — Strategic Logistic Solutions"></a>
+        <ul class="nav__menu">
+          <li><a class="nav__link is-active" href="#top">Для кого</a></li>
+          <li><a class="nav__link" href="#services">Послуги</a></li>
+          <li><a class="nav__link" href="#advantages">Переваги</a></li>
+          <li><a class="nav__link" href="#process">Як працюємо</a></li>
+          <li><a class="nav__link" href="#geography">Географія</a></li>
+          <li><a class="nav__link" href="#cargo">Вантажі</a></li>
+          <li><a class="nav__link" href="#faq">FAQ</a></li>
+          <li class="nav__contact">
+            <div class="nav__social">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a>
+              <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3 2.9 11.4c-.9.36-.9.86-.16 1.08l4.6 1.44 1.78 5.5c.22.6.4.83.83.83.43 0 .62-.2.86-.43l2.3-2.24 4.77 3.52c.88.48 1.5.23 1.72-.81l3.1-14.6c.32-1.27-.48-1.84-1.3-1.5z"/></svg></a>
+              <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z M12 2a10 10 0 0 0-8.6 15.06L2 22l5.05-1.32A10 10 0 1 0 12 2zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3 .78.8-2.92-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
+            </div>
+            <a class="nav__crow" href="mailto:office@bigsupplychain.com"><span class="nav__crow-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>office@bigsupplychain.com</a>
+            <a class="nav__crow" href="tel:+380000000000"><span class="nav__crow-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 11.5a16 16 0 0 0 6 6l1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></span>+38 (000) 000 00 00</a>
+          </li>
+        </ul>
+        <div class="nav__right">
+          <span class="lang"><b>UA</b>/<span>EN</span></span>
+          <a class="nav__cta" href="#booking">Отримати розрахунок
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button class="nav__burger" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile drawer overlay -->
+  <div class="nav__overlay" hidden></div>
+
+  <!-- Mobile fixed bottom CTA -->
+  <div class="mobile-cta">
+    <a class="mobile-cta__call" href="tel:+380000000000" aria-label="Подзвонити">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 11.5a16 16 0 0 0 6 6l1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
+    <a class="btn btn--primary" href="#booking">Отримати розрахунок <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="hero__grid">
+        <div class="hero__left">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.3L20.5 10l-5.4 3.9 1.9 6.6L12 16.8 6.9 20.5l2-6.6L3.5 10l6.3-1.7L12 2z"/></svg>
+            Надійна логістика без кордонів
+          </span>
+          <h1 class="hero__title">Ваш єдиний партнер<br>у світовій логістиці</h1>
+          <div class="hero__media">
+            <span class="hero__media-bar"></span>
+            <div class="hero__thumb">
+              <video autoplay loop muted playsinline poster="assets/img/svc-port.webp">
+                <source src="assets/media/feature.webm" type="video/webm">
+                <source src="assets/media/feature.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <p class="hero__text">BIG Supply Chain організовує міжнародні перевезення для українських імпортерів та експортерів: море, авіа, авто, залізниця, митне оформлення, склади та повний контроль ланцюга постачання.</p>
+          <div class="hero__btns">
+            <a class="btn btn--primary" href="#booking">Отримати розрахунок</a>
+            <a class="btn btn--ghost" href="#services">Переглянути послуги</a>
+          </div>
+        </div>
+        <div class="hero__right">
+          <img src="assets/320A87FA-CE9A-4AC2-8A8D-FAE0BF71E394.png" alt="Брендовані контейнери BIG Supply Chain у порту">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURE -->
+  <section class="section" id="features" style="padding-top:0">
+    <div class="container">
+      <div class="kf-grid">
+        <article class="kf-block kf-card reveal">
+          <img class="kf-icon" src="assets/img/kf-icon-1.svg" alt="">
+          <div class="kf-foot">
+            <div class="kf-num">9</div>
+            <h3 class="kf-title">напрямів</h3>
+            <p class="kf-sub">логістичних послуг</p>
+          </div>
+        </article>
+        <article class="kf-block kf-video reveal">
+          <video autoplay loop muted playsinline poster="assets/img/svc-air.webp">
+            <source src="assets/media/hero-clip.webm" type="video/webm">
+            <source src="assets/media/hero-clip.mp4" type="video/mp4">
+          </video>
+          <div class="kf-contact">
+            <a href="#booking">Зв'язатися зараз</a>
+          </div>
+        </article>
+        <article class="kf-block kf-card reveal">
+          <img class="kf-icon" src="assets/img/kf-icon-2.svg" alt="">
+          <div class="kf-foot">
+            <div class="kf-num">24/7</div>
+            <h3 class="kf-title">координація</h3>
+            <p class="kf-sub">процесів</p>
+          </div>
+        </article>
+        <article class="kf-block kf-card reveal">
+          <img class="kf-icon" src="assets/img/kf-icon-3.svg" alt="">
+          <div class="kf-foot">
+            <div class="kf-num">1</div>
+            <h3 class="kf-title">партнер</h3>
+            <p class="kf-sub">за весь supply chain</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДЛЯ КОГО -->
+  <section class="section" id="audience">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title" style="white-space:nowrap;max-width:none">Для українського бізнесу у світі</h2>
+        <span class="eyebrow">Для кого ми працюємо</span>
+      </div>
+      <div class="cards cards--4">
+        <article class="icard aud-card">
+          <img src="assets/img/svc-port.webp" alt="">
+          <div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 21V12h6v9"/></svg></div>
+          <h3 class="icard__title">Імпортери</h3>
+          <p class="icard__desc">Доставляємо товари, сировину, обладнання та комплектуючі в Україну з Європи, Азії, Америки та інших регіонів.</p>
+        </article>
+        <article class="icard aud-card">
+          <img src="assets/img/svc-containers.webp" alt="">
+          <div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+          <h3 class="icard__title">Експортери</h3>
+          <p class="icard__desc">Організовуємо вивезення української продукції на міжнародні ринки з урахуванням маршруту, документів і термінів.</p>
+        </article>
+        <article class="icard aud-card">
+          <img src="assets/img/svc-warehouse.webp" alt="">
+          <div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5h10v3M3 13h18"/></svg></div>
+          <h3 class="icard__title">Виробники та трейдери</h3>
+          <p class="icard__desc">Забезпечуємо комплексну логістику для регулярних поставок, великих партій, контейнерних і мультимодальних перевезень.</p>
+        </article>
+        <article class="icard aud-card">
+          <img src="assets/img/service-4.jpg" alt="">
+          <div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 5 5 1-3.5 4 1 5.5L12 20l-5.5 2.5 1-5.5L4 8l5-1z"/></svg></div>
+          <h3 class="icard__title">Проєктні вантажі</h3>
+          <p class="icard__desc">Працюємо з нестандартними задачами: промисловість, будівництво, зелена енергетика, обладнання, генеральні та навалювальні вантажі.</p>
+        </article>
+      </div>
+      <div class="foot-cta foot-cta--accent">
+        <p>Не знаєте, який маршрут підійде вашому бізнесу?</p>
+        <a class="btn btn--primary" href="#booking">Обговорити вашу логістичну задачу <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- НАШІ ПОСЛУГИ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title">Міжнародна логістика повного циклу</h2>
+        <span class="eyebrow">Наші послуги</span>
+      </div>
+      <div class="blog-grid services-grid">
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-port.webp" alt="Морські контейнерні перевезення"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Морські контейнерні перевезення</h3>
+            <p class="post__desc">Організація FCL/LCL перевезень через ключові порти світу, оптимізація маршруту, фрахт, документи та контроль доставки.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-air.webp" alt="Міжнародні авіаперевезення"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Міжнародні авіаперевезення</h3>
+            <p class="post__desc">Швидка доставка термінових, цінних або чутливих вантажів з підбором оптимального авіамаршруту.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-containers.webp" alt="Залізничні перевезення"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Залізничні перевезення</h3>
+            <p class="post__desc">Рішення для великих партій, регулярних поставок і мультимодальної логістики через міжнародні залізничні коридори.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-warehouse.webp" alt="Збірні вантажі LCL"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Збірні вантажі LCL</h3>
+            <p class="post__desc">Перевезення невеликих партій без необхідності орендувати цілий контейнер або транспорт.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/guarantee.jpg" alt="Міжнародні автомобільні перевезення"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Міжнародні автомобільні перевезення</h3>
+            <p class="post__desc">Доставка вантажів автотранспортом по Європі, Україні та міжнародних напрямках. Використання власного автопарку.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-ship.webp" alt="Фрахтування суден"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Фрахтування суден</h3>
+            <p class="post__desc">Підбір і бронювання суден для генеральних, навалювальних, проєктних та великих партій вантажу.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-port.webp" alt="Митно-брокерські послуги"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Митно-брокерські послуги</h3>
+            <p class="post__desc">Супровід митного оформлення, підготовка документів, консультації та координація процесів.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-containers.webp" alt="Генеральні та навалювальні вантажі"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Генеральні та навалювальні вантажі</h3>
+            <p class="post__desc">Логістика для великих партій, сировини, промислових і спеціалізованих вантажів.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="post reveal">
+          <div class="post__top">
+            <div class="post__img"><img src="assets/img/svc-warehouse.webp" alt="Складські рішення"></div>
+          </div>
+          <div class="post__titlecard">
+            <h3 class="post__title">Складські рішення</h3>
+            <p class="post__desc">Тимчасове зберігання, консолідація, перевалка, комплектація та підготовка вантажів до подальшого транспортування.</p>
+            <a class="post__link" href="#booking">Дізнатися більше <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+      </div>
+      <div class="foot-cta">
+        <p>Підберемо оптимальне поєднання видів транспорту під ваш вантаж і бюджет.</p>
+        <a class="btn btn--primary" href="#booking">Підібрати логістичне рішення <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧОМУ ОБИРАЮТЬ НАС -->
+  <section class="section" id="advantages">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title">Одна команда для всієї логістики</h2>
+        <span class="eyebrow">Чому обирають нас</span>
+      </div>
+      <div class="adv-layout">
+        <div class="adv-intro reveal">
+          <p class="adv-lead">Один партнер замість десятків підрядників —<br>повний контроль маршруту, документів і термінів</p>
+        </div>
+        <div class="adv-stack">
+          <article class="icard" style="--i:0"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div><h3 class="icard__title">Повний цикл міжнародної логістики</h3><p class="icard__desc">Від маршруту й фрахту до документів, митниці, складування та доставки.</p></article>
+          <article class="icard" style="--i:1"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg></div><h3 class="icard__title">Глобальне покриття</h3><p class="icard__desc">Організовуємо перевезення по всьому світу: Європа, Азія, Близький Схід, Африка, Америка.</p></article>
+          <article class="icard" style="--i:2"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7M7 19a2 2 0 1 0 0-.01M17 19a2 2 0 1 0 0-.01"/></svg></div><h3 class="icard__title">Власний автопарк</h3><p class="icard__desc">Більше контролю, гнучкості та швидкості на автомобільних етапах перевезення.</p></article>
+          <article class="icard" style="--i:3"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="icard__title">Єдина точка відповідальності</h3><p class="icard__desc">Клієнт не координує десятки підрядників — BIG Supply Chain керує процесом комплексно.</p></article>
+          <article class="icard" style="--i:4"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div><h3 class="icard__title">Мультимодальна експертиза</h3><p class="icard__desc">Комбінуємо море, авто, авіа, залізницю та склади в оптимальний маршрут.</p></article>
+          <article class="icard" style="--i:5"><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="icard__title">Контроль і прозора комунікація</h3><p class="icard__desc">Супроводжуємо вантаж, інформуємо про статус і швидко реагуємо на зміни.</p></article>
+        </div>
+      </div>
+      <div class="adv-foot reveal">
+        <a class="btn btn--primary" href="#booking">Отримати варіанти маршруту <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЯК МИ ПРАЦЮЄМО -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title">Від заявки до доставки</h2>
+        <span class="eyebrow">Як ми працюємо</span>
+      </div>
+      <div class="steps">
+        <article class="step"><div class="step__num">01</div><h3 class="step__title">Заявка</h3><p class="step__desc">Ви залишаєте запит на сайті або зв'язуєтеся з нами будь-яким зручним способом.</p></article>
+        <article class="step"><div class="step__num">02</div><h3 class="step__title">Аналіз потреб</h3><p class="step__desc">Наші фахівці уточнюють маршрут, характеристики вантажу, терміни та особливі вимоги.</p></article>
+        <article class="step"><div class="step__num">03</div><h3 class="step__title">Розрахунок і пропозиція</h3><p class="step__desc">Ми готуємо оптимальне логістичне рішення, пропонуємо декілька варіантів доставки та погоджуємо вартість.</p></article>
+        <article class="step"><div class="step__num">04</div><h3 class="step__title">Організація перевезення</h3><p class="step__desc">Бронюємо транспорт, оформлюємо необхідні документи, координуємо всі етапи перевезення та митного оформлення.</p></article>
+        <article class="step"><div class="step__num">05</div><h3 class="step__title">Контроль доставки</h3><p class="step__desc">Супроводжуємо вантаж у режимі реального часу, інформуємо про статус та оперативно вирішуємо будь-які питання.</p></article>
+        <article class="step"><div class="step__num">06</div><h3 class="step__title">Доставка та завершення</h3><p class="step__desc">Вантаж прибуває до місця призначення в узгоджені терміни. Ми надаємо повний пакет документів і залишаємося вашим партнером.</p></article>
+      </div>
+      <div class="foot-cta">
+        <p>Готові розпочати? Запустимо ваше перевезення вже сьогодні.</p>
+        <a class="btn btn--primary" href="#booking">Запустити перевезення <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГЕОГРАФІЯ -->
+  <section class="section" id="geography">
+    <div class="container">
+      <div class="geo-grid">
+        <div>
+          <span class="label-pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>Географія перевезень</span>
+          <h2 class="sec-title">Міжнародна логістика з України та між країнами світу</h2>
+          <p class="sec-sub">BIG Supply Chain організовує міжнародні перевезення по всьому світу, забезпечуючи комплексні логістичні рішення для імпорту, експорту та транзитних вантажів.</p>
+          <div class="geo-tags">
+            <div class="geo-marquee__track">
+              <span class="tag"><span></span>Імпорт в Україну</span>
+              <span class="tag"><span></span>Експорт з України</span>
+              <span class="tag"><span></span>Cross Trade між третіми країнами</span>
+              <span class="tag"><span></span>Door-to-Door логістика</span>
+              <span class="tag"><span></span>Мультимодальні перевезення</span>
+              <span class="tag" aria-hidden="true"><span></span>Імпорт в Україну</span>
+              <span class="tag" aria-hidden="true"><span></span>Експорт з України</span>
+              <span class="tag" aria-hidden="true"><span></span>Cross Trade між третіми країнами</span>
+              <span class="tag" aria-hidden="true"><span></span>Door-to-Door логістика</span>
+              <span class="tag" aria-hidden="true"><span></span>Мультимодальні перевезення</span>
+            </div>
+          </div>
+        </div>
+        <div class="geo-map">
+          <div class="geo-map__inner">
+            <img class="geo-map__bg" src="assets/img/world-map.svg" alt="Карта світу — географія перевезень">
+            <svg class="geo-routes" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M49 38 Q 40 30 52 33"></path>
+              <path d="M49 38 Q 64 30 72 46"></path>
+              <path d="M49 38 Q 52 44 58 48"></path>
+              <path d="M49 38 Q 46 52 50 60"></path>
+              <path d="M49 38 Q 32 30 24 44"></path>
+              <path d="M49 38 Q 30 56 30 70"></path>
+            </svg>
+            <button class="geo-pin is-origin is-open" style="left:49%;top:38%" type="button" aria-label="Одеса, Україна">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/svc-port.webp')"></span>
+                <span class="geo-pop__name">Одеса, Україна</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:52%;top:33%" type="button" aria-label="Європа">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/svc-containers.webp')"></span>
+                <span class="geo-pop__name">Європа</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:72%;top:46%" type="button" aria-label="Азія">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/svc-ship.webp')"></span>
+                <span class="geo-pop__name">Азія</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:58%;top:48%" type="button" aria-label="Близький Схід">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/svc-warehouse.webp')"></span>
+                <span class="geo-pop__name">Близький Схід</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:50%;top:60%" type="button" aria-label="Африка">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/cargo-3.jpg')"></span>
+                <span class="geo-pop__name">Африка</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:24%;top:44%" type="button" aria-label="Північна Америка">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/svc-air.webp')"></span>
+                <span class="geo-pop__name">Північна Америка</span>
+              </span>
+            </button>
+            <button class="geo-pin" style="left:30%;top:70%" type="button" aria-label="Південна Америка">
+              <span class="geo-dot"></span>
+              <span class="geo-pop">
+                <span class="geo-pop__img" style="background-image:url('assets/img/cargo-1.jpg')"></span>
+                <span class="geo-pop__name">Південна Америка</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="geo-foot reveal">
+        <a class="btn btn--primary" href="#booking">Перевірити маршрут <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТИПИ ВАНТАЖІВ -->
+  <section class="section" id="cargo">
+    <div class="container">
+      <div class="cargo2">
+        <aside class="cargo2__aside reveal">
+          <img src="assets/D1A84E39-1E0F-41BC-A9B9-4B1C2213A69A.png" alt="" loading="lazy">
+          <div class="cargo2__inner">
+            <h2>Вантажі для ключових галузей економіки</h2>
+            <span class="cargo2__bar" aria-hidden="true"></span>
+            <p>Працюємо з різними типами вантажів — від регулярних контейнерних перевезень до складної проєктної логістики. Розуміємо потреби вашої галузі та пропонуємо ефективні рішення для вашого бізнесу.</p>
+          </div>
+        </aside>
+
+        <div class="cargo2__list reveal">
+          <details name="cargo">
+            <summary><span class="cargo2__num">01</span><span class="cargo2__t">Агро</span></summary>
+            <p>Логістика для агропродукції, сировини, обладнання та експортних партій.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">02</span><span class="cargo2__t">Будівництво</span></summary>
+            <p>Матеріали, техніка, комплектуючі, великі партії та проєктні поставки.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">03</span><span class="cargo2__t">Промисловість</span></summary>
+            <p>Обладнання, деталі, сировина, виробничі компоненти та регулярні поставки.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">04</span><span class="cargo2__t">Зелена енергетика</span></summary>
+            <p>Компоненти для енергетичних проєктів, обладнання, конструкції та спеціальні вантажі.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">05</span><span class="cargo2__t">Автомобільна галузь</span></summary>
+            <p>Запчастини, комплектуючі, обладнання, імпортні та експортні поставки.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">06</span><span class="cargo2__t">Хімічна продукція</span></summary>
+            <p>Перевезення з урахуванням вимог до документів, умов транспортування та безпеки.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">07</span><span class="cargo2__t">Контейнерні вантажі</span></summary>
+            <p>FCL, LCL, мультимодальні маршрути, імпорт, експорт та cross trade.</p>
+          </details>
+          <details name="cargo">
+            <summary><span class="cargo2__num">08</span><span class="cargo2__t">Проєктна логістика</span></summary>
+            <p>Нестандартні, складні, великогабаритні або комплексні вантажі з індивідуальною організацією маршруту.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФОРМА ЗАЯВКИ -->
+  <section class="section" id="booking">
+    <div class="container">
+      <div class="booking">
+        <div class="booking__media">
+          <img src="assets/img/form.webp" alt="Заявка на розрахунок перевезення">
+          <div class="ov"></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Декілька варіантів маршруту під ваш баланс ціни й термінів</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Єдина команда на весь маршрут, документи та митницю</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Контроль статусу вантажу на кожному етапі</li>
+          </ul>
+        </div>
+        <div class="booking__form">
+          <span class="label-pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>Заявка на розрахунок</span>
+          <h2 class="sec-title" style="font-size:2rem;max-width:none">Отримайте розрахунок для вашого вантажу</h2>
+          <p class="sec-sub" style="margin-bottom:26px">Опишіть вантаж і маршрут — команда BIG Supply Chain підготує оптимальне логістичне рішення та зв'яжеться з вами для уточнення деталей.</p>
+          <form onsubmit="return false">
+            <div class="field"><label>Опис вантажу: тип, вага</label><input type="text" placeholder="Напр. обладнання, 1200 кг, 2 палети"></div>
+            <div class="form-row">
+              <div class="field"><label>Пункт відправлення: країна, місто / порт</label><input type="text" placeholder="Напр. Shanghai, CN"></div>
+              <div class="field"><label>Пункт призначення: країна, місто / порт</label><input type="text" placeholder="Напр. Odesa, UA"></div>
+            </div>
+            <div class="field"><label>Ваша компанія + ім'я</label><input type="text" placeholder="Компанія, контактна особа"></div>
+            <div class="form-row">
+              <div class="field"><label>Телефон</label><input type="tel" placeholder="+38 (0__) ___ __ __"></div>
+              <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+            </div>
+            <label class="consent"><input type="checkbox"> Я погоджуюся з політикою конфіденційності та обробкою персональних даних.</label>
+            <button class="btn btn--primary" type="submit" style="width:100%;justify-content:center">Отримати розрахунок</button>
+            <p class="form-note">Ми не надсилаємо спам. Заявка потрібна лише для підготовки маршруту, вартості та варіантів доставки.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГАРАНТІЇ ТА БЕЗПЕКА -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title">Повний контроль на кожному етапі</h2>
+        <span class="eyebrow">Гарантії та безпека</span>
+      </div>
+      <div class="cards cards--3">
+        <article class="icard aud-card gcard"><img src="assets/img/guarantee.jpg" alt=""><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="icard__title">Єдина точка контролю</h3><p class="icard__desc">Ви працюєте з однією командою, яка координує маршрут, документи, перевізників, склади та митне оформлення.</p></article>
+        <article class="icard aud-card gcard"><img src="assets/img/service-2.jpg" alt=""><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg></div><h3 class="icard__title">Документальний супровід</h3><p class="icard__desc">Готуємо та координуємо необхідні документи для міжнародних перевезень, імпорту, експорту та митного оформлення.</p></article>
+        <article class="icard aud-card gcard"><img src="assets/img/svc-ship.webp" alt=""><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><h3 class="icard__title">Контроль статусу вантажу</h3><p class="icard__desc">Супроводжуємо перевезення, інформуємо про ключові етапи та оперативно реагуємо на зміни.</p></article>
+        <article class="icard aud-card gcard"><img src="assets/img/service-3.jpg" alt=""><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div><h3 class="icard__title">Перевірені логістичні рішення</h3><p class="icard__desc">Підбираємо маршрут не лише за ціною, а й за термінами, ризиками, типом вантажу та вимогами клієнта.</p></article>
+        <article class="icard aud-card gcard"><img src="assets/img/svc-port.webp" alt=""><div class="icard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="icard__title">Безпека ланцюга постачання</h3><p class="icard__desc">Враховуємо особливості вантажу, маршруту, країни походження, пункту призначення та документообігу.</p></article>
+        <div class="qcell"><a class="btn btn--primary" href="#booking">Поставити питання логісту <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="sec-bar reveal">
+        <h2 class="sec-title">Відповіді на питання</h2>
+        <span class="eyebrow">Часті запитання</span>
+      </div>
+      <div class="faq-layout">
+        <div class="faq">
+          <details name="faq" open><summary>Ви працюєте тільки з Україною чи по всьому світу?</summary><p>Ми родом з Одеси, але організовуємо міжнародні перевезення worldwide: імпорт в Україну, експорт з України, cross trade між третіми країнами та мультимодальні маршрути.</p></details>
+          <details name="faq"><summary>Які типи перевезень ви організовуєте?</summary><p>Морські контейнерні, авіа, залізничні, автомобільні, LCL, фрахтування суден, складські рішення, митно-брокерські послуги, генеральні та навалювальні вантажі.</p></details>
+          <details name="faq"><summary>Чи можете ви взяти весь процес під ключ?</summary><p>Так. BIG Supply Chain працює як єдина точка відповідальності: маршрут, транспорт, фрахт, документи, митниця, склад, контроль доставки та фінальний пакет документів.</p></details>
+          <details name="faq"><summary>Чи працюєте ви зі збірними вантажами?</summary><p>Так. Ми організовуємо LCL-перевезення для вантажів, яким не потрібен повний контейнер або окремий транспорт.</p></details>
+          <details name="faq"><summary>Чи можна розрахувати декілька варіантів доставки?</summary><p>Так. Ми можемо підготувати декілька маршрутів з різним балансом вартості, термінів і ризиків.</p></details>
+          <details name="faq"><summary>Які дані потрібні для розрахунку?</summary><p>Потрібні тип вантажу, вага, об'єм або габарити, пункт відправлення, пункт призначення, бажані терміни та особливі вимоги.</p></details>
+          <details name="faq"><summary>Чи допомагаєте ви з митним оформленням?</summary><p>Так. Ми надаємо митно-брокерські послуги та супроводжуємо документи для імпорту, експорту й міжнародних перевезень.</p></details>
+          <details name="faq"><summary>Чи працюєте ви з проєктною логістикою?</summary><p>Так. Ми працюємо з промисловими, будівельними, енергетичними, генеральними, навалювальними та нестандартними вантажами.</p></details>
+        </div>
+        <div class="faq-media"><img src="assets/img/svc-air.webp" alt="Авіаційне перевезення вантажів"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="section">
+    <div class="container">
+      <div class="thero__card cta-reveal">
+        <div class="thero__left">
+          <img class="thero__logo" src="assets/image%207.png" alt="BIG Supply Chain">
+          <h2 class="thero__title">Один партнер для <span class="cta-pair">всього<br class="cta-br"> ланцюга</span> постачання</h2>
+          <a class="btn btn--primary thero__cta" href="#booking">Отримати розрахунок <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="thero__right">
+          <img class="thero__container" src="assets/7C065D58-4A29-4BC7-B180-98733390669B.png" alt="Брендований контейнер BIG Supply Chain на крані">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__logo"><img src="assets/image%207.png" alt="BIG Supply Chain"></div>
+          <p class="footer__about">Міжнародна логістика для українських імпортерів та експортерів. Родом з Одеси. Працюємо worldwide.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3 2.9 11.4c-.9.36-.9.86-.16 1.08l4.6 1.44 1.78 5.5c.22.6.4.83.83.83.43 0 .62-.2.86-.43l2.3-2.24 4.77 3.52c.88.48 1.5.23 1.72-.81l3.1-14.6c.32-1.27-.48-1.84-1.3-1.5z"/></svg></a>
+            <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z M12 2a10 10 0 0 0-8.6 15.06L2 22l5.05-1.32A10 10 0 1 0 12 2zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3 .78.8-2.92-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Навігація</h4>
+          <a href="#audience">Для кого</a>
+          <a href="#services">Послуги</a>
+          <a href="#advantages">Переваги</a>
+          <a href="#process">Як працюємо</a>
+          <a href="#geography">Географія</a>
+          <a href="#cargo">Вантажі</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer__col">
+          <h4>Послуги</h4>
+          <a href="#services">Морські контейнерні перевезення</a>
+          <a href="#services">Міжнародні авіаперевезення</a>
+          <a href="#services">Залізничні перевезення</a>
+          <a href="#services">Автомобільні перевезення</a>
+          <a href="#services">Митно-брокерські послуги</a>
+          <a href="#services">Складські рішення</a>
+        </div>
+        <div class="footer__col">
+          <h4>Контакти</h4>
+          <a href="tel:+380000000000">+38 (000) 000 00 00</a>
+          <a href="mailto:office@bigsupplychain.com">office@bigsupplychain.com</a>
+          <a href="#">Odesa, Ukraine</a>
+          <a href="#">Координація процесів 24/7</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 BIG Supply Chain. Усі права захищено.</span>
+        <span>Політика конфіденційності &middot; Умови використання &middot; Обробка персональних даних</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mark elements to reveal on scroll
+    document.querySelectorAll('.sec-bar, .kf-block, .icard, .step, .geo-map, .booking, .foot-cta, .faq details, .tag').forEach(function(el){el.classList.add('reveal')});
+    // Stagger siblings inside grids
+    document.querySelectorAll('.kf-grid, .cards, .steps, .geo-tags').forEach(function(grid){
+      Array.prototype.forEach.call(grid.children, function(c,i){ if(c.classList.contains('reveal')) c.style.transitionDelay=(i%4)*90+'ms'; });
+    });
+    // Index cards used for mobile sticky-stacking (services + guarantees)
+    document.querySelectorAll('.services-grid .post').forEach(function(c,i){c.style.setProperty('--si',i)});
+    document.querySelectorAll('.cards--3 .gcard').forEach(function(c,i){c.style.setProperty('--si',i)});
+    // IntersectionObserver
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal, .cta-reveal').forEach(function(el){io.observe(el)});
+
+    // Mobile burger menu
+    (function(){
+      var header=document.querySelector('.header'),
+          burger=document.querySelector('.nav__burger'),
+          menu=document.querySelector('.nav__menu'),
+          overlay=document.querySelector('.nav__overlay');
+      if(!header||!burger||!menu) return;
+      function setOpen(open){
+        header.classList.toggle('header--menu-open',open);
+        burger.setAttribute('aria-expanded',open?'true':'false');
+        document.body.style.overflow=open?'hidden':'';
+        if(overlay) overlay.hidden=!open;
+      }
+      burger.addEventListener('click',function(){ setOpen(!header.classList.contains('header--menu-open')); });
+      menu.addEventListener('click',function(e){ if(e.target.closest('.nav__link, .nav__contact a')) setOpen(false); });
+      if(overlay) overlay.addEventListener('click',function(){ setOpen(false); });
+    })();
+
+    // Header: hide on scroll down, reveal on scroll up
+    (function(){
+      var header=document.querySelector('.header');
+      if(!header) return;
+      var lastY=window.pageYOffset||0, ticking=false;
+      function update(){
+        var y=window.pageYOffset||0;
+        var delta=y-lastY;
+        if(y>header.offsetHeight && delta>4){ header.classList.add('header--hidden'); }
+        else if(delta<-2 || y<=header.offsetHeight){ header.classList.remove('header--hidden'); }
+        lastY=y; ticking=false;
+      }
+      window.addEventListener('scroll',function(){
+        if(!ticking){ window.requestAnimationFrame(update); ticking=true; }
+      },{passive:true});
+    })();
+  </script>
+
+</body>
+</html>

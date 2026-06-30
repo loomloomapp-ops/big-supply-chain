@@ -1,0 +1,9 @@
+# OS
+.DS_Store
+**/.DS_Store
+
+# Heavy reference template (not part of the deployed site)
+assets/SaveWeb2ZIP Website Copier (1)/
+
+# Local scratch
+scratchpad/
