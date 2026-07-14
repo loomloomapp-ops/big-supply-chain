@@ -1198,6 +1198,53 @@
         if(!ticking){ window.requestAnimationFrame(update); ticking=true; }
       },{passive:true});
     })();
+
+    // Smooth accordion open/close (cargo industries + FAQ)
+    (function(){
+      var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      var DUR=400, EASE='cubic-bezier(.16,1,.3,1)';
+      var items=document.querySelectorAll('.cargo2__list details, .faq details');
+      if(!items.length) return;
+
+      function content(det){ var s=det.querySelector('summary'); return s?s.nextElementSibling:null; }
+
+      function expand(det){
+        var c=content(det); if(!c) return;
+        det.open=true;
+        if(reduce||!c.animate) return;
+        c.style.overflow='hidden'; c.style.boxSizing='border-box';
+        var h=c.getBoundingClientRect().height;
+        var a=c.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:DUR,easing:EASE});
+        det._anim=a;
+        a.onfinish=a.oncancel=function(){ c.style.overflow=''; c.style.boxSizing=''; c.style.height=''; det._anim=null; };
+      }
+      function collapse(det, done){
+        var c=content(det); if(!c){ det.open=false; if(done)done(); return; }
+        if(reduce||!c.animate){ det.open=false; if(done)done(); return; }
+        c.style.overflow='hidden'; c.style.boxSizing='border-box';
+        var h=c.getBoundingClientRect().height;
+        var a=c.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:DUR,easing:EASE});
+        det._anim=a;
+        a.onfinish=a.oncancel=function(){ det.open=false; c.style.overflow=''; c.style.boxSizing=''; c.style.height=''; det._anim=null; if(done)done(); };
+      }
+
+      items.forEach(function(det){
+        var summary=det.querySelector('summary');
+        if(!summary) return;
+        summary.addEventListener('click', function(e){
+          e.preventDefault();
+          if(det._anim) return;
+          if(det.open){ collapse(det); return; }
+          var name=det.getAttribute('name'), siblingClosing=false;
+          if(name){
+            document.querySelectorAll('details[name="'+name+'"]').forEach(function(o){
+              if(o!==det && o.open){ siblingClosing=true; collapse(o); }
+            });
+          }
+          expand(det);
+        });
+      });
+    })();
   </script>
 
 </body>
